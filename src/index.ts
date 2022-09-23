@@ -2,11 +2,11 @@ import express, { Request, Response, NextFunction } from 'express'
 import path from 'path'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import helmet from 'helmet'
 
 import appRoute from './app/app.routing'
 
 const app = express()
-
 
 // 設定跨域存取的限定，目前是開放所有網域
 app.use(
@@ -19,8 +19,11 @@ app.use(
 )
 
 // 包山包海法 , 每當有資料進來的時候都會去執行它，這樣的做法是最簡單的，但也是比較不好的做法 ：
-// 個別使用法的做法是 最推薦的 ex : router.post('/', express.json(), (req, res) => {} )
+// 個別使用法的做法是最推薦的 ex : router.post('/', express.json(), (req, res) => {} )
 app.use(express.json())
+
+// Express 安全防護,當前設定為全開啟並使用預設值
+app.use(helmet())
 
 // 動態選擇環境變數的檔案 , 因為 prod , dev 路徑不同，需用 ../退到根目錄再指定 src 資料夾內的 env
 dotenv.config({
