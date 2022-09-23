@@ -2,6 +2,8 @@ import express from 'express'
 import path from 'path'
 import dotenv from 'dotenv'
 
+import appRoute from './app/app.routing';
+
 const app = express()
 
 // 動態選擇環境變數的檔案 , 因為 prod , dev 路徑不同，需用 ../退到根目錄再指定 src 資料夾內的 env
@@ -11,6 +13,8 @@ dotenv.config({
     `../src/environments/${process.env.NODE_ENV}.env`
   )
 })
+
+app.use('/', appRoute);
 
 app.get('/', (req, res, next) => {
   res.send('Hello, Express')
