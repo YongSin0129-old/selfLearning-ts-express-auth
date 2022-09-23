@@ -131,4 +131,5 @@ dist
 
 # user settings
 .vscode
-src/environments
+src/environments/production.env
+src/environments/development.env

@@ -3,6 +3,8 @@ import path from 'path'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import helmet from 'helmet'
+import { Database } from './database'
+
 
 import appRoute from './app/app.routing'
 
@@ -32,6 +34,7 @@ dotenv.config({
     `../src/environments/${process.env.NODE_ENV}.env`
   )
 })
+Database.connect()
 
 // route 入口
 app.use('/', appRoute)
