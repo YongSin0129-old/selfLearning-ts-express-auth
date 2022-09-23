@@ -5,7 +5,6 @@ import cors from 'cors'
 import helmet from 'helmet'
 import { Database } from './database'
 
-
 import appRoute from './app/app.routing'
 
 const app = express()
@@ -23,6 +22,11 @@ app.use(
 // 包山包海法 , 每當有資料進來的時候都會去執行它，這樣的做法是最簡單的，但也是比較不好的做法 ：
 // 個別使用法的做法是最推薦的 ex : router.post('/', express.json(), (req, res) => {} )
 app.use(express.json())
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+)
 
 // Express 安全防護,當前設定為全開啟並使用預設值
 app.use(helmet())
@@ -36,11 +40,21 @@ dotenv.config({
 })
 Database.connect()
 
+// debug
+app.get('/', (req, res, next) => {
+  const debugObj = {
+    headers: req.headers,
+    method: req.method,
+    body: req.body
+  }
+  // res.json(debugObj)
+  next()
+})
+
 // route 入口
 app.use('/', appRoute)
-
 app.get('/', (req, res, next) => {
-  res.send('Hello, Express')
+  res.send('hello , express')
 })
 
 // global error message handler
