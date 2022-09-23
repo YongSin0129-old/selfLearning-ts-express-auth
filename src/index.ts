@@ -1,10 +1,22 @@
 import express, { Request, Response, NextFunction } from 'express'
 import path from 'path'
 import dotenv from 'dotenv'
+import cors from 'cors'
 
 import appRoute from './app/app.routing'
 
 const app = express()
+
+
+// 設定跨域存取的限定，目前是開放所有網域
+app.use(
+  cors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+  })
+)
 
 // 包山包海法 , 每當有資料進來的時候都會去執行它，這樣的做法是最簡單的，但也是比較不好的做法 ：
 // 個別使用法的做法是 最推薦的 ex : router.post('/', express.json(), (req, res) => {} )
