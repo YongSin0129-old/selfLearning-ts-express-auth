@@ -14,6 +14,7 @@ export class TodoRoute extends RouteBase {
   }
 
   protected registerRoute(): void {
-    this.router.get('/', (req ,res, next) => this.controller.getTodos(req, res, next));
+    this.router.get('/', (req ,res, next) => this.responseHandler(this.controller.getTodos)
+);
   }
 }

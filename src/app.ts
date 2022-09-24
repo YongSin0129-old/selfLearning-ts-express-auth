@@ -1,4 +1,9 @@
-import express, { Request, Response, NextFunction } from 'express'
+import express, {
+  Request,
+  Response,
+  NextFunction,
+  ErrorRequestHandler
+} from 'express'
 import path from 'path'
 import cors from 'cors'
 import helmet from 'helmet'
@@ -15,7 +20,6 @@ export class App {
     this.setCors()
     this.registerRoute()
   }
-
 
   // ====================================================================
   // @Public Methods
@@ -76,6 +80,10 @@ export class App {
     this.app.use('/', this.route.router)
 
     this.app.get('/', (req, res, next) => res.send('Hello! express !!!'))
+  }
+
+  public setException (handler: ErrorRequestHandler): void {
+    this.app.use(handler)
   }
 }
 
