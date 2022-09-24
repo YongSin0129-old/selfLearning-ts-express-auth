@@ -9,6 +9,6 @@ export class ApiRoute extends RouteBase {
   }
 
   protected registerRoute (): void {
-    this.router.use('/todo', ApiRoute.todoRoute.router)
+    this.router.use('/todos', ApiRoute.todoRoute.router)
   }
 }
