@@ -9,6 +9,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
 import { AppRoute } from './app.routing'
+import { Database } from './database'
 
 export class App {
   private app = express()
@@ -84,6 +85,11 @@ export class App {
 
   public setException (handler: ErrorRequestHandler): void {
     this.app.use(handler)
+  }
+
+  public launchDatabase (): void {
+    const database = new Database()
+    database.connect()
   }
 }
 

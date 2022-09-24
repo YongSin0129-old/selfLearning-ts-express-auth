@@ -1,16 +1,14 @@
 import mongoose from 'mongoose'
+import { DATABASE_OPTIONS } from './database.option'
 
-const DB_CONNECT_OPTIONS = {}
-
-export const Database = {
-  connect: () => {
+export class Database {
+  public connect (): void {
     mongoose
       .connect(
         `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PWD}@cluster0.ac5wn.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
-
-        DB_CONNECT_OPTIONS
+        DATABASE_OPTIONS
       )
-      .then(() => console.log('Database is connected.'))
-      .catch(err => console.log(err))
+      .then(() => console.log(`Database ${process.env.DB_NAME} is connected.`))
+      .catch(err => console.error(err))
   }
 }
