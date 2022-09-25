@@ -26,4 +26,38 @@ export class TodoController extends ControllerBase {
     const dtos = todos.map(todo => new TodoDTO(todo))
     return this.formatResponse(dtos, HttpStatus.OK)
   }
+
+  public async completedTodo (req: Request): Promise<ResponseObject> {
+    const { id } = req.params
+    const { completed } = req.body
+    const options = {
+      new: true,
+      runValidators: true
+    }
+    const todo = await TodoModel.findByIdAndUpdate(id, { completed }, options)
+    if (!todo) {
+      return this.formatResponse('Not found.', HttpStatus.NOT_FOUND)
+    }
+    const dto = new TodoDTO(todo)
+    return this.formatResponse(dto, HttpStatus.OK)
+  }
+
+  public async removeTodo (req: Request): Promise<ResponseObject> {
+    const { id } = req.params
+    const todo = await TodoModel.findByIdAndRemove(id)
+    if (!todo) {
+      return this.formatResponse('Not found.', HttpStatus.NOT_FOUND)
+    }
+    return this.formatResponse(null, HttpStatus.NO_CONTENT)
+  }
+
+  public async getTodo (req: Request): Promise<ResponseObject> {
+    const { id } = req.params
+    const todo = await TodoModel.findById(id)
+    if (!todo) {
+      return this.formatResponse('Not found.', HttpStatus.NOT_FOUND)
+    }
+    const dto = new TodoDTO(todo)
+    return this.formatResponse(dto, HttpStatus.OK)
+  }
 }
