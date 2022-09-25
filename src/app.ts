@@ -13,7 +13,7 @@ import { Database } from './database'
 
 export class App {
   private app = express()
-  private route = new AppRoute()
+  private AppRoute = new AppRoute()
 
   constructor () {
     this.setEnvironment()
@@ -78,7 +78,7 @@ export class App {
       next()
     })
     // route 導向
-    this.app.use('/', this.route.router)
+    this.app.use('/', this.AppRoute.router)
 
     this.app.get('/', (req, res, next) => res.send('Hello! express !!!'))
   }

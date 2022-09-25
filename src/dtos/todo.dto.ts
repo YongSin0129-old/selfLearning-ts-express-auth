@@ -6,7 +6,7 @@ export class TodoDTO extends DTOBase {
   public readonly completed!: boolean
 
   constructor (doc: TodoDocument) {
-    super(doc.id)
+    super(doc)
     this.content = doc.content
     this.completed = doc.completed
   }
