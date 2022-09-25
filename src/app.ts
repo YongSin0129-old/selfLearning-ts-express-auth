@@ -10,6 +10,7 @@ import helmet from 'helmet'
 import dotenv from 'dotenv'
 import { AppRoute } from './app.routing'
 import { Database } from './database'
+import passport from 'passport'
 
 export class App {
   private app = express()
@@ -19,6 +20,7 @@ export class App {
     this.setEnvironment()
     this.setHelmet()
     this.setCors()
+    this.setPassport()
     this.registerRoute()
   }
 
@@ -90,6 +92,10 @@ export class App {
   public launchDatabase (): void {
     const database = new Database()
     database.connect()
+  }
+
+  private setPassport (): void {
+    passport.initialize()
   }
 }
 
