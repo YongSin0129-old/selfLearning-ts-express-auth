@@ -57,7 +57,7 @@ export class App {
     dotenv.config({
       path: path.resolve(
         __dirname,
-        `../src/environments/${process.env.NODE_ENV}.env`
+        `./environments/${process.env.NODE_ENV}.env`
       )
     })
   }
