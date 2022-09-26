@@ -5,7 +5,7 @@ export abstract class ControllerBase {
   public formatResponse (
     data: any,
     status = HttpStatus.INTERNAL_ERROR
-  ): ResponseObject {
+  ): ResponseObject<any> {
     const options: any = { status }
     
     status >= 400 ? (options.message = data) : (options.data = data)

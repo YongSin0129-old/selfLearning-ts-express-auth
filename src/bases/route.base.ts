@@ -24,7 +24,7 @@ export abstract class RouteBase {
       req: Request,
       res: Response,
       next: NextFunction
-    ) => Promise<ResponseObject>,
+    ) => Promise<ResponseObject<any>>,
     controller = this.controller
   ) {
     return (req: Request, res: Response, next: NextFunction) => {
