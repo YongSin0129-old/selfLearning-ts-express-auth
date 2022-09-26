@@ -4,6 +4,7 @@ import { ControllerBase } from './controller.base'
 import { HttpStatus } from '../types/response.type'
 
 import { ResponseObject } from '../common/response/response.object'
+import { PipeBase } from './pipe.base'
 
 export abstract class RouteBase {
   public router = Router()
@@ -40,5 +41,10 @@ export abstract class RouteBase {
           )
         )
     }
+  }
+
+  protected usePipe (prototype: any): any[] {
+    const pipe = new prototype()
+    return (pipe as PipeBase).transform()
   }
 }
