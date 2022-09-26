@@ -14,7 +14,7 @@ import passport from 'passport'
 
 export class App {
   private app = express()
-  private AppRoute = new AppRoute()
+  private AppRoute!: AppRoute
 
   constructor () {
     this.setEnvironment()
@@ -80,8 +80,8 @@ export class App {
       next()
     })
     // route 導向
+    this.AppRoute = new AppRoute()
     this.app.use('/', this.AppRoute.router)
-
     this.app.get('/', (req, res, next) => res.send('Hello! express !!!'))
   }
 
