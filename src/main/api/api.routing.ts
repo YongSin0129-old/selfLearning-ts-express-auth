@@ -10,11 +10,10 @@ export class ApiRoute extends RouteBase {
   }
 
   protected registerRoute (): void {
-    const secret = process.env.JWT_SIGN || 'default secret'
     this.router.use(
       expressjwt({
-        secret: secret,
-        // userProperty: 'payload',
+        secret: process.env.JWT_SIGN as string,
+        requestProperty: 'payload',
         algorithms: ['HS256']
       })
     )
